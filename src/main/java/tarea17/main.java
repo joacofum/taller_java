@@ -11,9 +11,9 @@ import java.util.List;
 
 public class main {
     public static void main(String[] args){
-        //Crear el array de objetos
+        //Creo el array de objetos
         List<Electrodomestico> electrodomesticos = new ArrayList<>();
-        double precio_total_lavadoras=  0 , precio_total_televisiones = 0;
+        double precio_total_lavadoras = 0 , precio_total_televisiones = 0;
 
         //Creo Televisores
         for (int i=0; i<5; i++){
@@ -24,6 +24,7 @@ public class main {
             electrodomesticos.add(t);
         }
 
+        //Creo Lavadoras
         for (int i=0; i<5; i++){
             double precio = (Math.random() * 1000+1);
             double peso = (Math.random() * 100);
@@ -36,7 +37,7 @@ public class main {
             electrodomesticos.get(i).precioFinal();
         }
 
-        //Mostrar el precio final de cada electrodomestrico
+        //Mostrar el precio final de cada electrodoméstico
         NumberFormat formatter = new DecimalFormat("#0.00");
         for(int i=0;i<electrodomesticos.size();i++){
             if(electrodomesticos.get(i) instanceof Television){
@@ -50,7 +51,7 @@ public class main {
             }
         }
 
-        //Mostrar el precio Total de cada tipo de Electrodomestico
+        //Mostrar el precio total de cada tipo de electrodoméstico
         System.out.println();
         System.out.println("Precio total Lavadoras: $"+formatter.format(precio_total_lavadoras));
         System.out.println("Precio total Television: $"+formatter.format(precio_total_televisiones));
