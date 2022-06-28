@@ -1,4 +1,4 @@
-package tarea15.clases;
+package tarea16.clases;
 
 import java.util.Random;
 

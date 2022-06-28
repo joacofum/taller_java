@@ -1,4 +1,4 @@
-package tarea16.clases;
+package tarea17.clases;
 
 public class Lavadora extends Electrodomestico{
     final static double carga_defecto = 5;

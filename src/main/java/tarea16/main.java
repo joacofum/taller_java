@@ -1,62 +1,89 @@
 package tarea16;
 
-import tarea16.clases.Electrodomestico;
-import tarea16.clases.Lavadora;
-import tarea16.clases.Television;
+import tarea16.clases.Persona;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.List;
-import java.util.Random;
+import java.util.Scanner;
 
 public class main {
     public static void main(String[] args){
-        //Crear el array de objetos
-        List<Electrodomestico> electrodomesticos = new ArrayList<>();
-        double precio_total_lavadoras=  0 , precio_total_televisiones = 0;
+        Scanner entrada = new Scanner(System.in);
+        System.out.println("-----Crear Persona-----\n");
 
-        //Creo Televisores
-        for (int i=0; i<5; i++){
-            double precio = (Math.random() * 1000+1);
-            double peso = (Math.random() * 100);
-            double pulgadas = (Math.random() * 100);
-            Television t = new Television(precio, peso,"negro",'E',pulgadas,true);
-            electrodomesticos.add(t);
+        System.out.println("Ingrese nombre: ");
+        String nombre = entrada.nextLine();
+
+        System.out.println("Ingrese edad: ");
+        int edad = entrada.nextInt();
+
+        System.out.println("Ingrese sexo: ");
+        char sexo = entrada.next().charAt(0);
+
+        System.out.println("Ingrese peso: ");
+        double peso = entrada.nextDouble();
+
+        System.out.println("Ingrese altura: ");
+        double altura = entrada.nextDouble();
+
+        //Todos los atribs
+        Persona p1 = new Persona(nombre, edad, 0, sexo, peso, altura);
+
+        //Todos menos peso y altura
+        Persona p2 = new Persona(nombre, edad, sexo);
+
+        //Por defecto
+        Persona p3 = new Persona();
+        p3.setEdad(edad);
+        p3.setSexo(sexo);
+        p3.setPeso(peso);
+        p3.setAltura(altura);
+
+        //Chequeos
+        System.out.println("------Persona 1------\n");
+        int IMC = p1.calcularIMC(peso, altura);
+        System.out.println("Estado de índice de masa corporal: " + obtenerRespuestaIMC(IMC) );
+
+        boolean mayorEdad = p1.esMayorDeEdad(edad);
+        System.out.println("Estado de índice de masa corporal: " + mostrarMayorEdad(mayorEdad) );
+
+        System.out.println(p1);
+
+        System.out.println("------Persona 2------\n");
+        int IMC2 = p2.calcularIMC(peso, altura);
+        System.out.println("Estado de índice de masa corporal: " + obtenerRespuestaIMC(IMC2) );
+
+        boolean mayorEdad2 = p2.esMayorDeEdad(edad);
+        System.out.println("Estado de índice de masa corporal: " + mostrarMayorEdad(mayorEdad2) );
+        System.out.println(p2);
+
+        System.out.println("------Persona 3------\n");
+        int IMC3 = p3.calcularIMC(peso, altura);
+        System.out.println("Estado de índice de masa corporal: " + obtenerRespuestaIMC(IMC3) );
+
+        boolean mayorEdad3 = p3.esMayorDeEdad(edad);
+        System.out.println("Estado de índice de masa corporal: " + mostrarMayorEdad(mayorEdad3) );
+        System.out.println(p3);
+
+    }
+
+    private static String mostrarMayorEdad(boolean mayorEdad) {
+        String respuesta = "";
+        if(mayorEdad){
+            respuesta = "Es mayor de edad";
+        }else{
+            respuesta = "Es menor de edad";
         }
+        return respuesta;
+    }
 
-        for (int i=0; i<5; i++){
-            double precio = (Math.random() * 1000+1);
-            double peso = (Math.random() * 100);
-            double carga = (Math.random() * 100);
-            electrodomesticos.add(new Lavadora(precio,peso,"azul",'B',carga));
+    private static String obtenerRespuestaIMC(int IMC) {
+        String respuestaIMC = "";
+        if(IMC == -1){
+            respuestaIMC = "Insuficiente";
+        } else if (IMC == 0) {
+            respuestaIMC = "Normal";
+        } else if (IMC == 1) {
+            respuestaIMC = "Sobrepeso";
         }
-
-        //Precio final.
-        for(int i=0;i<electrodomesticos.size();i++){
-            electrodomesticos.get(i).precioFinal();
-        }
-
-        //Mostrar el precio final de cada electrodomestrico
-        NumberFormat formatter = new DecimalFormat("#0.00");
-        for(int i=0;i<electrodomesticos.size();i++){
-            if(electrodomesticos.get(i) instanceof Television){
-                Television t = (Television) electrodomesticos.get(i);
-                System.out.println("Television "+ i +": $" + formatter.format(t.getPrecioBase()));
-                precio_total_televisiones += t.getPrecioBase();
-            }else{
-                Lavadora l = (Lavadora) electrodomesticos.get(i);
-                System.out.println("Lavadora "+ i +": $"+ formatter.format(l.getPrecioBase()));
-                precio_total_lavadoras += l.getPrecioBase();
-            }
-        }
-
-        //Mostrar el precio Total de cada tipo de Electrodomestico
-        System.out.println();
-        System.out.println("Precio total Lavadoras: $"+formatter.format(precio_total_lavadoras));
-        System.out.println("Precio total Television: $"+formatter.format(precio_total_televisiones));
-        System.out.println("Precio total Electrodomesticos: $"+formatter.format(precio_total_lavadoras+precio_total_televisiones));
-
+        return respuestaIMC;
     }
 }

@@ -1,4 +1,4 @@
-package tarea16.clases;
+package tarea17.clases;
 
 public class Television extends Electrodomestico {
     private double resolucion = 20;
